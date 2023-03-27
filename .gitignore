@@ -37,3 +37,9 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Local directory for junk files
+/local/
+
+# Secrets directory for secrets
+/secrets/
