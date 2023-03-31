@@ -81,12 +81,11 @@ stateSenate <- state_legislative_districts(state = "OK", house = "upper")
 stateHouse <- state_legislative_districts(state = "OK", house = "lower")
 ## Voting Precincts
 votingPrecincts <- voting_districts(state = "OK")
-## TODO: City Council Districts
-# Boilerplate:
-# cityCouncilDistricts <-
-#   st_read(here("src/data/cityCouncil_Districts/cityCouncil_Districts.shp")) |>
-#   st_transform(crs = 4269) |>
-#   st_make_valid()
+##City Council Districts
+cityCouncilDistricts <-
+  st_read(here("src/data/Council_Districts/Council_Districts.shp")) |>
+  st_transform(crs = 4269) |>
+  st_make_valid()
 ## Judicial Districts
 judicialDistricts <-
   st_read(here("src/data/Judicial_Districts/Judicial_Districts.shp")) |>
@@ -139,97 +138,89 @@ data_sf <-
   ## Tulsa County
   st_join(
     county |>
-    select(name_county = NAMELSAD, GEOID_county = GEOID, geometry_county = geometry)
+      select(county = NAMELSAD, county_id = GEOID)
   ) |>
   ## Cities/Towns
   st_join(
     citiesAndTowns |>
-    mutate(municipalDesignation = str_extract(NAMELSAD, "city|town")) |>
-    select(
-      name_citiesAndTowns = NAME, municipalDesignation,
-      GEOID_citiesAndTowns = GEOID, geometry_citiesAndTowns = geometry
-    )
+      mutate(municipal_designation = str_extract(NAMELSAD, "city|town")) |>
+      select(
+        cities_and_towns = NAME, municipal_designation,
+        cities_and_towns_id = GEOID
+      )
   ) |>
   ## ZIP Codes
   st_join(
     zipCodes |>
-    select(
-      GEOID_zipCodes = ZCTA5CE10, geometry_zipCodes = geometry
-    )
+      select(
+        zip_code_id = ZCTA5CE10
+      )
   ) |>
   ## Census Tracts
   st_join(
     censusTracts |>
-    select(
-      name_censusTracts = NAMELSAD, GEOID_censusTracts = GEOID, geometry_censusTracts = geometry
-    )
-  ) |>
-  # City/Town
-  st_join(
-    schoolDistricts |>
-    select(schoolDistrict = SD_NAME, GEOID_schoolDistrict = SD_CODE, geometry)
+      select(
+        census_tract = NAMELSAD, census_tract_id = GEOID
+      )
   ) |>
   # Federal Legislative District
   st_join(
     federalHouse |>
-    select(
-      name_federalHouse = NAMELSAD, GEOID_federalHouse = GEOID, geometry_federalHouse = geometry
-    )
+      select(
+        federal_house = NAMELSAD, federal_house_id = GEOID
+      )
   ) |>
   # State Legislative District
   st_join(
     stateHouse |>
-    select(
-      name_stateHouse = NAMELSAD, GEOID_stateHouse = GEOID, geometry_stateHouse = geometry
-    )
+      select(
+        state_house = NAMELSAD, state_house_id = GEOID
+      )
   ) |>
   st_join(
     stateSenate |>
-    select(
-      name_stateSenate = NAMELSAD, GEOID_stateSenate = GEOID, geometry_stateSenate = geometry
-    )
+      select(
+        state_senate = NAMELSAD, state_senate_id = GEOID
+      )
   ) |>
-  # TODO: City Council District
-  ## Boilerplate:
-#  st_join(
-#    cityCouncilDistricts |>
-#    select(
-#      name_cityCouncilDistricts = NAMELSAD, GEOID_cityCouncilDistricts = GEOID,
-#      geometry_cityCouncilDistricts = geometry
-#    )
-#  ) |>
+  # City Council District
+  st_join(
+    cityCouncilDistricts |>
+      select(
+        city_council_districts = NAME, city_council_districts_id = DISTRICTID
+      )
+  ) |>
   # Judicial Precincts
   st_join(
     judicialDistricts |>
-    mutate(name_judicialDistricts =  paste("Judicial District", DISTRICT)) |>
-    select(name_judicialDistricts, GEOID_judicialDistricts = DISTRICT,
-           geometry_judicialDistricts = geometry)
+      mutate(judicial_district =  paste("Judicial District", DISTRICT)) |>
+      select(judicial_district, judicial_district_id = DISTRICT)
   ) |>
   # Voting Precincts
   st_join(
     votingPrecincts |>
-    select(
-      name_votingPrecincts = NAMELSAD20, GEOID_votingPrecincts = GEOID20,
-      geometry_votingPrecincts = geometry
-    )
+      select(
+        voting_precinct = NAMELSAD20, voting_precinct_id = GEOID20
+      )
   ) |>
   # Tulsa County Public School Districts
   st_join(
     schoolDistricts |>
-    select(name_schoolDistrict = SD_NAME, GEOID_schoolDistrict = SD_CODE,
-           geometry_schoolDistricts = geometry)
+      select(school_district = SD_NAME, school_district_id = SD_CODE)
   ) |>
   # Tribal Lands
   st_join(
     tribalLands |>
-    select(name_tribe = TRIBAL_NAM, name_tribalLand = TRIBAL_ARE,
-           GEOID_tribalLands = TRIBAL_UTM, geometry_tribalLandss = geometry)
+      select(tribal_nation = TRIBAL_NAM, tribal_land = TRIBAL_ARE,
+             tribal_land_id = TRIBAL_UTM)
   )
 
 ### Mapping Example
 # Coordinates to sf
-mapview(data_sf, map.types = "Stamen.Toner") +
-mapview(schoolDistricts, color = "red", alpha = 1) +
-mapview(county, color = "cyan", col.regions = "#00000000")
+mapview(data_sf, col.regions = "cyan", map.types = "Stamen.Toner") +
+mapview(cityCouncilDistricts, color = "purple4", lwd = 2,
+        alpha = 1, alpha.regions = 0.4) +
+mapview(county, color = "black", col.regions = "#000000",
+        alpha = 0.8, alpha.regions = 0.05)
 
 write_csv(data_sf, here("out/analysis/tulsaEvictionGeographies.csv"))
