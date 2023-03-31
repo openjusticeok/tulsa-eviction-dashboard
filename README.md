@@ -12,7 +12,7 @@ and places those cases within different geographic levels. The levels available 
 - Judicial Districts
 - Tulsa Count Public School Districts
 - Tribal Lands
-- ~~TBD: City Council Districts~~
+- City Council Districts
 
 ## Instructions:
 
