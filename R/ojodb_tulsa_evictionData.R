@@ -18,7 +18,7 @@ data <- ojo_tbl("case") |>
     filter(
         district == "TULSA",
         case_type == "SC",
-        date_filed >= "2022-02-01",
+        date_filed >= "2018-01-01",
         date_filed < "2023-03-01"
     ) |>
     select(id, district, date_filed, date_closed, status) |>

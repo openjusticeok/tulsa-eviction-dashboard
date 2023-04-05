@@ -96,7 +96,7 @@ schoolDistricts <- st_read(here("data/shapefiles/school_districts/School_Distric
   st_make_valid()
 
 ## Tribal Lands
-tribalLands <- st_read(here("data/shapefiles/tribal_boundaries/tribal_boundaries.shp")) |>
+tribalLands <- st_read(here("data/shapefiles/tribal_boundaries/Tribal_Boundaries.shp")) |>
   st_transform(crs = 4269) |>
   st_make_valid()
 # Filter for only federally recognized tribal areas.
