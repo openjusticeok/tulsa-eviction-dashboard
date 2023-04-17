@@ -169,8 +169,9 @@ data_sf <-
   # City Council District
   st_join(
     cityCouncilDistricts |>
+      mutate(council = paste("Tulsa City Council", NAME)) |>
       select(
-        council = NAME, council_id = DISTRICTID
+        council, council_id = DISTRICTID
       )
   ) |>
   # Tulsa County Public School Districts
@@ -207,7 +208,9 @@ data_sf <-
   # Tribal Lands
   st_join(
     tribalLands |>
-      select(tribal_nation = TRIBAL_NAM, tribal = TRIBAL_ARE,
+      mutate(tribal = TRIBAL_ARE |> str_to_title() |>  tools::toTitleCase()) |>
+      mutate(tribal = gsub("Indain", "Indian", tribal)) |>
+      select(tribal_nation = TRIBAL_NAM, tribal,
              tribal_id = TRIBAL_UTM)
   )
 
