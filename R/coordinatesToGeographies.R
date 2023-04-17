@@ -12,10 +12,11 @@ library(sf) # Spatial Manipulation
 library(tigris) # Load Census TIGER/Line Shapefiles
 library(sp)
 library(mapview)
+library(leaflet)
 library(ojodb) # Working with OJO data
 
 
-## Load LocationData
+## Load locationData
 locationData <- ojo_tbl("address", schema = "eviction_addresses") |>
   select(case, lat, lon, geo_accuracy) |>
   collect()
@@ -34,7 +35,7 @@ data <- caseData |>
   left_join(locationData, by = c("id" = "case"))
 
 ## Get Number and Percent for cases that have don't have an address or have a bad accuracy score
-# 3/23/2023; 9.6% of cases either have missing addresses or bad location accuracy.
+# 4/17/2023; 23% of cases either have missing addresses or bad location accuracy.
 data |>
   summarise(
     count_NA = sum(is.na(lat)),
@@ -112,7 +113,8 @@ data_sf <- st_as_sf(
     data,
     coords = c("lon", "lat"),
     crs = 4269,
-    agr = "constant"
+    agr = "constant",
+    remove = FALSE # Keep lat and lon
   )
 
 # Provide additional geographic filter to ensure data are within Tulsa County
@@ -129,33 +131,52 @@ data_sf <-
 ## Create variables containing each cases location within every geographic level
 data_sf <-
   data_sf |>
+  select(case_number = id, date = date_filed, lat, lon) |>
   ## Tulsa County
   st_join(
     county |>
       select(county = NAMELSAD, county_id = GEOID)
   ) |>
-  ## Cities/Towns
+  # Voting Precincts
   st_join(
-    citiesAndTowns |>
-      mutate(municipal_designation = str_extract(NAMELSAD, "city|town")) |>
+    votingPrecincts |>
       select(
-        cities_and_towns = NAME, municipal_designation,
-        cities_and_towns_id = GEOID
-      )
-  ) |>
-  ## ZIP Codes
-  st_join(
-    zipCodes |>
-      select(
-        zip_code_id = ZCTA5CE10
+        precinct = NAMELSAD20, precinct_id = GEOID20
       )
   ) |>
   ## Census Tracts
   st_join(
     censusTracts |>
       select(
-        census_tract = NAMELSAD, census_tract_id = GEOID
+        tract = NAMELSAD, tract_id = GEOID
       )
+  ) |>
+  ## ZIP Codes
+  st_join(
+    zipCodes |>
+      select(
+        zip_id = ZCTA5CE10
+      )
+  ) |>
+  ## Cities/Towns
+  st_join(
+    citiesAndTowns |>
+      mutate(municipal_designation = str_extract(NAMELSAD, "city|town")) |>
+      select(
+        city = NAME, municipal_designation, city_id = GEOID
+      )
+  ) |>
+  # City Council District
+  st_join(
+    cityCouncilDistricts |>
+      select(
+        council = NAME, council_id = DISTRICTID
+      )
+  ) |>
+  # Tulsa County Public School Districts
+  st_join(
+    schoolDistricts |>
+      select(school = SD_NAME, school_id = SD_CODE)
   ) |>
   # Federal Legislative District
   st_join(
@@ -164,7 +185,7 @@ data_sf <-
         federal_house = NAMELSAD, federal_house_id = GEOID
       )
   ) |>
-  # State Legislative District
+  # State Legislative Districts (House and Senate)
   st_join(
     stateHouse |>
       select(
@@ -177,44 +198,38 @@ data_sf <-
         state_senate = NAMELSAD, state_senate_id = GEOID
       )
   ) |>
-  # City Council District
-  st_join(
-    cityCouncilDistricts |>
-      select(
-        city_council_districts = NAME, city_council_districts_id = DISTRICTID
-      )
-  ) |>
   # Judicial Precincts
   st_join(
     judicialDistricts |>
-      mutate(judicial_district =  paste("Judicial District", DISTRICT)) |>
-      select(judicial_district, judicial_district_id = DISTRICT)
-  ) |>
-  # Voting Precincts
-  st_join(
-    votingPrecincts |>
-      select(
-        voting_precinct = NAMELSAD20, voting_precinct_id = GEOID20
-      )
-  ) |>
-  # Tulsa County Public School Districts
-  st_join(
-    schoolDistricts |>
-      select(school_district = SD_NAME, school_district_id = SD_CODE)
+      mutate(judicial =  paste("Judicial District", DISTRICT)) |>
+      select(judicial, judicial_id = DISTRICT)
   ) |>
   # Tribal Lands
   st_join(
     tribalLands |>
-      select(tribal_nation = TRIBAL_NAM, tribal_land = TRIBAL_ARE,
-             tribal_land_id = TRIBAL_UTM)
+      select(tribal_nation = TRIBAL_NAM, tribal = TRIBAL_ARE,
+             tribal_id = TRIBAL_UTM)
   )
 
-### Mapping Example
+### Mapping Example of 5000 Addresses
 # Coordinates to sf
-mapview(data_sf, col.regions = "cyan", map.types = "Stamen.Toner") +
-mapview(cityCouncilDistricts, color = "purple4", lwd = 2,
-        alpha = 1, alpha.regions = 0.4) +
-mapview(county, color = "black", col.regions = "#000000",
-        alpha = 0.8, alpha.regions = 0.05)
+mapview(
+  votingPrecincts |> filter(COUNTYFP20 == "143"),
+  color = "purple4", lwd = 2,
+  alpha = 1, alpha.regions = 0.4,
+  highlight = leaflet::highlightOptions(
+    color = "red", fill = "red", fillOpacity = .6, opacity = .6,
+    weight = 5, bringToFront = FALSE
+  )
+) +
+mapview(
+  county,
+  color = "black", col.regions = "#000000",
+  alpha = 0.8, alpha.regions = 0.05
+) +
+mapview(
+  data_sf[1:5000,], col.regions = "cyan"
+)
 
-write_csv(data_sf, here("data/tulsaEvictionGeographies.csv"))
+write_csv(data_sf, here("data/tulsa_eviction_cases.csv"))
+write_csv(data_sf |> slice(1:20), here("data/tulsa_eviction_cases_preview.csv"))
