@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "tulsa_bubble_federal_house_districts",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "4001", "name": "Congressional District 1", "pop": 646403.5222, "rhh": 104065.475 }, "geometry": { "type": "Point", "coordinates": [ -96.029777538676086, 36.1402604 ] } },
+{ "type": "Feature", "properties": { "id": "4002", "name": "Congressional District 2", "pop": 3.8229, "rhh": 0.2854 }, "geometry": { "type": "Point", "coordinates": [ -95.803450831980058, 36.4235521 ] } },
+{ "type": "Feature", "properties": { "id": "4003", "name": "Congressional District 3", "pop": 11.6541, "rhh": 1.2394 }, "geometry": { "type": "Point", "coordinates": [ -96.195605387518711, 36.1612595 ] } }
+]
+}

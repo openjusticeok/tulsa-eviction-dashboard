@@ -1,0 +1,30 @@
+{
+"type": "FeatureCollection",
+"name": "tulsa_bubble_school_districts",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "19C034", "name": "Pretty Water", "pop": 3.5787, "rhh": 0.2389 }, "geometry": { "type": "Point", "coordinates": [ -96.150574241666988, 36.0757198 ] } },
+{ "type": "Feature", "properties": { "id": "19C035", "name": "Allen-Bowden", "pop": 0.8115, "rhh": 0.0495 }, "geometry": { "type": "Point", "coordinates": [ -96.080259662034962, 36.07555905 ] } },
+{ "type": "Feature", "properties": { "id": "19I003", "name": "Mannford", "pop": 1.1902, "rhh": 0.0664 }, "geometry": { "type": "Point", "coordinates": [ -96.297869545594182, 36.0919764 ] } },
+{ "type": "Feature", "properties": { "id": "19I033", "name": "Sapulpa", "pop": 4.0422, "rhh": 0.2477 }, "geometry": { "type": "Point", "coordinates": [ -96.032368834031246, 36.07538235 ] } },
+{ "type": "Feature", "properties": { "id": "51I002", "name": "Haskell", "pop": 4.0405, "rhh": 0.1323 }, "geometry": { "type": "Point", "coordinates": [ -95.814613335685323, 35.9011489 ] } },
+{ "type": "Feature", "properties": { "id": "56I004", "name": "Beggs", "pop": 0.6475, "rhh": 0.0506 }, "geometry": { "type": "Point", "coordinates": [ -95.999848854034667, 35.85685895 ] } },
+{ "type": "Feature", "properties": { "id": "57C052", "name": "Anderson", "pop": 5.8414, "rhh": 0.9458 }, "geometry": { "type": "Point", "coordinates": [ -96.166013747242687, 36.1609414 ] } },
+{ "type": "Feature", "properties": { "id": "66I002", "name": "Catoosa", "pop": 0.9572, "rhh": 0.1797 }, "geometry": { "type": "Point", "coordinates": [ -95.768822647360594, 36.16267525 ] } },
+{ "type": "Feature", "properties": { "id": "66I004", "name": "Oologah-Talala", "pop": 1.0968, "rhh": 0.1128 }, "geometry": { "type": "Point", "coordinates": [ -95.794332221726705, 36.4121282 ] } },
+{ "type": "Feature", "properties": { "id": "72C015", "name": "Keystone", "pop": 3124.873, "rhh": 174.2516 }, "geometry": { "type": "Point", "coordinates": [ -96.257464004339369, 36.11230615 ] } },
+{ "type": "Feature", "properties": { "id": "72I001", "name": "Tulsa", "pop": 275923.532, "rhh": 55792.0345 }, "geometry": { "type": "Point", "coordinates": [ -95.908304049188885, 36.1692959 ] } },
+{ "type": "Feature", "properties": { "id": "72I002", "name": "Sand Springs", "pop": 24867.2541, "rhh": 2817.5537 }, "geometry": { "type": "Point", "coordinates": [ -96.159062067032806, 36.1128217 ] } },
+{ "type": "Feature", "properties": { "id": "72I003", "name": "Broken Arrow", "pop": 71930.3319, "rhh": 8386.7975 }, "geometry": { "type": "Point", "coordinates": [ -95.806319618651116, 36.0210307 ] } },
+{ "type": "Feature", "properties": { "id": "72I004", "name": "Bixby", "pop": 38591.6046, "rhh": 2593.3268 }, "geometry": { "type": "Point", "coordinates": [ -95.872693732548782, 35.9358927 ] } },
+{ "type": "Feature", "properties": { "id": "72I005", "name": "Jenks", "pop": 68418.6154, "rhh": 10501.6684 }, "geometry": { "type": "Point", "coordinates": [ -95.953492025, 36.0230656 ] } },
+{ "type": "Feature", "properties": { "id": "72I006", "name": "Collinsville", "pop": 12982.8371, "rhh": 1068.8281 }, "geometry": { "type": "Point", "coordinates": [ -95.875131387232926, 36.3709357 ] } },
+{ "type": "Feature", "properties": { "id": "72I007", "name": "Skiatook", "pop": 3323.4027, "rhh": 351.632 }, "geometry": { "type": "Point", "coordinates": [ -95.969675362375142, 36.3722495 ] } },
+{ "type": "Feature", "properties": { "id": "72I008", "name": "Sperry", "pop": 3294.4325, "rhh": 296.5798 }, "geometry": { "type": "Point", "coordinates": [ -95.942826980997381, 36.2946082 ] } },
+{ "type": "Feature", "properties": { "id": "72I009", "name": "Union", "pop": 85660.8452, "rhh": 16205.1093 }, "geometry": { "type": "Point", "coordinates": [ -95.85083987397465, 36.0661094 ] } },
+{ "type": "Feature", "properties": { "id": "72I010", "name": "Berryhill", "pop": 3797.2285, "rhh": 373.6751 }, "geometry": { "type": "Point", "coordinates": [ -96.065183301399685, 36.1209334 ] } },
+{ "type": "Feature", "properties": { "id": "72I011", "name": "Owasso", "pop": 36722.2564, "rhh": 4219.1045 }, "geometry": { "type": "Point", "coordinates": [ -95.883180874189037, 36.27892775 ] } },
+{ "type": "Feature", "properties": { "id": "72I013", "name": "Glenpool", "pop": 11294.1557, "rhh": 878.799 }, "geometry": { "type": "Point", "coordinates": [ -96.002720591185465, 35.9475741 ] } },
+{ "type": "Feature", "properties": { "id": "72I014", "name": "Liberty", "pop": 6464.018, "rhh": 405.4964 }, "geometry": { "type": "Point", "coordinates": [ -95.952850619722383, 35.87987245 ] } }
+]
+}

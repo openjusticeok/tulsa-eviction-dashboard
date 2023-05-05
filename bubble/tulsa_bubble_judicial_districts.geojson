@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "tulsa_bubble_judicial_districts",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "1", "name": "Judicial District 1", "pop": 114337.1173, "rhh": 22996.7144 }, "geometry": { "type": "Point", "coordinates": [ -95.924671706875344, 36.1262025 ] } },
+{ "type": "Feature", "properties": { "id": "2", "name": "Judicial District 2", "pop": 206089.4903, "rhh": 24684.2404 }, "geometry": { "type": "Point", "coordinates": [ -95.845108391528129, 35.987289 ] } },
+{ "type": "Feature", "properties": { "id": "3", "name": "Judicial District 3", "pop": 37665.1017, "rhh": 7421.5532 }, "geometry": { "type": "Point", "coordinates": [ -95.96179952614537, 36.193956 ] } },
+{ "type": "Feature", "properties": { "id": "4", "name": "Judicial District 4", "pop": 150996.459, "rhh": 23814.6065 }, "geometry": { "type": "Point", "coordinates": [ -95.895416119813277, 36.2408925 ] } },
+{ "type": "Feature", "properties": { "id": "5", "name": "Judicial District 5", "pop": 137263.337, "rhh": 25141.1245 }, "geometry": { "type": "Point", "coordinates": [ -95.9937053305365, 36.049971 ] } }
+]
+}

@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "tulsa_bubble_city_council_districts",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "1", "name": "Council District 1", "pop": 36502.177, "rhh": 7179.9753 }, "geometry": { "type": "Point", "coordinates": [ -95.961862009792952, 36.198504 ] } },
+{ "type": "Feature", "properties": { "id": "2", "name": "Council District 2", "pop": 41426.345, "rhh": 11224.5577 }, "geometry": { "type": "Point", "coordinates": [ -95.997896529307553, 36.0727809 ] } },
+{ "type": "Feature", "properties": { "id": "3", "name": "Council District 3", "pop": 45037.0474, "rhh": 7609.5182 }, "geometry": { "type": "Point", "coordinates": [ -95.842110104514404, 36.1870567 ] } },
+{ "type": "Feature", "properties": { "id": "4", "name": "Council District 4", "pop": 41021.0391, "rhh": 8909.2189 }, "geometry": { "type": "Point", "coordinates": [ -95.961912975748476, 36.1399711 ] } },
+{ "type": "Feature", "properties": { "id": "5", "name": "Council District 5", "pop": 47638.6726, "rhh": 10196.0965 }, "geometry": { "type": "Point", "coordinates": [ -95.890994109060017, 36.11892945 ] } },
+{ "type": "Feature", "properties": { "id": "6", "name": "Council District 6", "pop": 41818.2892, "rhh": 6423.1998 }, "geometry": { "type": "Point", "coordinates": [ -95.806372490112437, 36.1262413 ] } },
+{ "type": "Feature", "properties": { "id": "7", "name": "Council District 7", "pop": 50113.4858, "rhh": 11779.5874 }, "geometry": { "type": "Point", "coordinates": [ -95.877643157141051, 36.06814275 ] } },
+{ "type": "Feature", "properties": { "id": "8", "name": "Council District 8", "pop": 45167.7904, "rhh": 6378.0187 }, "geometry": { "type": "Point", "coordinates": [ -95.913524542516043, 36.02168155 ] } },
+{ "type": "Feature", "properties": { "id": "9", "name": "Council District 9", "pop": 44746.8828, "rhh": 10073.747 }, "geometry": { "type": "Point", "coordinates": [ -95.955265615036367, 36.089871 ] } }
+]
+}

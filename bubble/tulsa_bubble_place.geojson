@@ -1,0 +1,26 @@
+{
+"type": "FeatureCollection",
+"name": "tulsa_bubble_place",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "4067850", "name": "Skiatook city, Oklahoma", "pop": 7962.0, "rhh": 1036.0 }, "geometry": { "type": "Point", "coordinates": [ -96.018983233545754, 36.3771135 ] } },
+{ "type": "Feature", "properties": { "id": "4006400", "name": "Bixby city, Oklahoma", "pop": 26541.0, "rhh": 2175.0 }, "geometry": { "type": "Point", "coordinates": [ -95.892750986443914, 35.9356105 ] } },
+{ "type": "Feature", "properties": { "id": "4009050", "name": "Broken Arrow city, Oklahoma", "pop": 108496.0, "rhh": 10471.0 }, "geometry": { "type": "Point", "coordinates": [ -95.790684005394894, 36.0185595 ] } },
+{ "type": "Feature", "properties": { "id": "4065300", "name": "Sand Springs city, Oklahoma", "pop": 19794.0, "rhh": 2392.0 }, "geometry": { "type": "Point", "coordinates": [ -96.182843148058595, 36.189639 ] } },
+{ "type": "Feature", "properties": { "id": "4016350", "name": "Collinsville city, Oklahoma", "pop": 6882.0, "rhh": 811.0 }, "geometry": { "type": "Point", "coordinates": [ -95.907702761661966, 36.4199875 ] } },
+{ "type": "Feature", "properties": { "id": "4039750", "name": "Kiefer town, Oklahoma", "pop": 2251.0, "rhh": 152.0 }, "geometry": { "type": "Point", "coordinates": [ -96.062508577054444, 35.935486 ] } },
+{ "type": "Feature", "properties": { "id": "4049550", "name": "Mounds town, Oklahoma", "pop": 1099.0, "rhh": 193.0 }, "geometry": { "type": "Point", "coordinates": [ -96.060437924326237, 35.8868135 ] } },
+{ "type": "Feature", "properties": { "id": "4065400", "name": "Sapulpa city, Oklahoma", "pop": 21041.0, "rhh": 2814.0 }, "geometry": { "type": "Point", "coordinates": [ -96.088449466421451, 36.006813 ] } },
+{ "type": "Feature", "properties": { "id": "4012900", "name": "Catoosa city, Oklahoma", "pop": 7705.0, "rhh": 1206.0 }, "geometry": { "type": "Point", "coordinates": [ -95.751252194206643, 36.2028395 ] } },
+{ "type": "Feature", "properties": { "id": "4056650", "name": "Owasso city, Oklahoma", "pop": 36173.0, "rhh": 4225.0 }, "geometry": { "type": "Point", "coordinates": [ -95.841544626003667, 36.2901815 ] } },
+{ "type": "Feature", "properties": { "id": "4080250", "name": "Westport town, Oklahoma", "pop": 479.0, "rhh": 36.0 }, "geometry": { "type": "Point", "coordinates": [ -96.332509119318289, 36.1918645 ] } },
+{ "type": "Feature", "properties": { "id": "4029600", "name": "Glenpool city, Oklahoma", "pop": 13666.0, "rhh": 1253.0 }, "geometry": { "type": "Point", "coordinates": [ -96.00780791385759, 35.9264625 ] } },
+{ "type": "Feature", "properties": { "id": "4037800", "name": "Jenks city, Oklahoma", "pop": 22488.0, "rhh": 1647.0 }, "geometry": { "type": "Point", "coordinates": [ -95.986043578470458, 36.001303 ] } },
+{ "type": "Feature", "properties": { "id": "4069300", "name": "Sperry town, Oklahoma", "pop": 1275.0, "rhh": 169.0 }, "geometry": { "type": "Point", "coordinates": [ -95.994167571112271, 36.3002045 ] } },
+{ "type": "Feature", "properties": { "id": "4053350", "name": "Oakhurst CDP, Oklahoma", "pop": 2272.0, "rhh": 303.0 }, "geometry": { "type": "Point", "coordinates": [ -96.08177277099692, 36.084568 ] } },
+{ "type": "Feature", "properties": { "id": "4075150", "name": "Turley CDP, Oklahoma", "pop": 2559.0, "rhh": 337.0 }, "geometry": { "type": "Point", "coordinates": [ -95.971475524903354, 36.2457305 ] } },
+{ "type": "Feature", "properties": { "id": "4075000", "name": "Tulsa city, Oklahoma", "pop": 402324.0, "rhh": 80810.0 }, "geometry": { "type": "Point", "coordinates": [ -95.85507776386639, 36.1465275 ] } },
+{ "type": "Feature", "properties": { "id": "4042860", "name": "Liberty town, Oklahoma", "pop": 188.0, "rhh": 20.0 }, "geometry": { "type": "Point", "coordinates": [ -95.991413041847466, 35.8672445 ] } },
+{ "type": "Feature", "properties": { "id": "4046200", "name": "Mannford town, Oklahoma", "pop": 3225.0, "rhh": 469.0 }, "geometry": { "type": "Point", "coordinates": [ -96.329264688564322, 36.1264415 ] } }
+]
+}

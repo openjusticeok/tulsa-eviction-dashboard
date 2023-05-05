@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "tulsa_bubble_county",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "40143", "name": "Tulsa County, Oklahoma", "pop": 646419.0, "rhh": 104067.0 }, "geometry": { "type": "Point", "coordinates": [ -96.029776478337311, 36.13266 ] } }
+]
+}
