@@ -235,3 +235,41 @@ mapview(
 )
 
 write_csv(data_sf, here("data/tulsa_eviction_cases.csv"))
+
+data_sf <-
+  data_sf |>
+  mutate(year = year(date), month = month(date))
+
+id_columns <-
+  data_sf |>
+  as_tibble() |>
+  select(-geometry) |>
+  select(ends_with("id")) |>
+  names() |>
+  gsub(pattern = "city_id", replacement = "city")
+
+
+pivot_geography_longer <- function(data, id_column) {
+
+  geography <-
+    gsub("(.*)_id", "\\1", id_column) |>
+    gsub(pattern = "_", replacement = " ") |>
+    str_to_title()
+
+  data |>
+    filter(!is.na({{id_column}})) |>
+    summarise(tot_evic = n(), .by = c({{id_column}}, year, month)) |>
+    rename(NAME = !!enquo(id_column)) |>
+    mutate(NAME = as.character(NAME)) |>
+    mutate(Geography = geography) |>
+    arrange(NAME, year, month) |>
+    relocate(NAME, Geography)
+}
+
+data_sf_longer <-
+  map(.x = id_columns, .f = pivot_geography_longer, data = data_sf) |>
+  bind_rows() |>
+  as_tibble() |>
+  select(-geometry)
+
+write_csv(data_sf_longer, here("data/tulsa_datadownload.csv"))

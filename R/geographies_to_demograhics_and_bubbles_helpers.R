@@ -284,5 +284,4 @@ geographies_to_demographics_and_bubbles <- function(.state,
     filename_prefix = paste0(.filename_prefix, "_bubble_"),
     .delete_dsn = TRUE
   )
-
 }
