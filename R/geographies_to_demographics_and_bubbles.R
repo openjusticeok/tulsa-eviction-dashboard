@@ -72,7 +72,7 @@ custom_geographies <- c(
   "city_council_districts", "school_districts", "judicial_districts",
   "federal_house_districts", "state_senate_districts", "state_house_districts",
   "voting_precincts"
-  )
+)
 
 #### Main Function
 geographies_to_demographics_and_bubbles(
