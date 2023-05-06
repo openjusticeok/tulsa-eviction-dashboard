@@ -1,4 +1,3 @@
-#### Helper Functions:
 
 #' @title Format County Names
 #'
@@ -106,31 +105,54 @@ get_acs_vars <- function(
   return(census_data)
 }
 
-#' @title Cust
+#' @title Custom Geography Interpolate Area-Weighted
+#' 
+#' @description Area-weighted areal interpolation for a custom geogpraphy (from a user-provided sf)
+#' of a list of variables from another sf.
+#' 
+#' @param source An sf object of the source geography.
+#' @param target An sf object of the target geography.
+#' @param .keep A numeric value of the simplification tolerance.
+#' 
+#' @return An sf object of the interpolated variables.
+#' 
+#' @importFrom dplyr filter mutate rename select
+#' @importFrom sf st_area st_intersection st_make_valid st_set_crs st_set_geometry
+#' @importFrom units set_units
+#' @importFrom purrr map
+#' 
+#' @export
+#'
 custom_geo_interpolate_aw <- function(source, target, .keep = 0.2) {
-  "Area-weighted areal interpolation for a custom geogpraphy (from a user-provided sf)
-  of a list of variables from another sf."
-
-  geometries_to_exclude <-
-    c("GEOMETRYCOLLECTION", "LINESTRING", "MULTILINESTRING", "POINT")
+  geometries_to_exclude <- c(
+    "GEOMETRYCOLLECTION",
+    "LINESTRING",
+    "MULTILINESTRING",
+    "POINT"
+  )
 
   custom_geo <- source |>
     st_intersection(target) |>
     st_make_valid() |>
-    filter(!st_is_empty(geometry)) %>%
-    mutate(new_geometry = purrr::map(geometry, ~ {
-      if (st_geometry_type(.x) == "GEOMETRYCOLLECTION") {
-        poly <- st_collection_extract(.x, "POLYGON")
-        if (!is_empty(poly)) {
-          return(poly)
+    filter(!st_is_empty(geometry)) |>
+    mutate(
+      new_geometry = purrr::map(
+        geometry,
+        function(x) {
+          if (st_geometry_type(x) == "GEOMETRYCOLLECTION") {
+            poly <- st_collection_extract(x, "POLYGON")
+            if (!is_empty(poly)) {
+              return(poly)
+            }
+          }
+          return(x)
         }
-      }
-      return(.x)
-    })) %>%
-    st_set_geometry("new_geometry") %>%
-    select(-geometry) %>%
+      )
+    ) |>
+    st_set_geometry("new_geometry") |>
+    select(-geometry) |>
     rename(geometry = new_geometry) |>
-    filter(!(st_geometry_type(geometry) %in% geometries_to_exclude)) %>%
+    filter(!st_geometry_type(geometry) %in% geometries_to_exclude) |>
     st_set_crs(4269) |>
     st_make_valid() %>%
     mutate(
@@ -170,8 +192,30 @@ custom_geo_interpolate_aw <- function(source, target, .keep = 0.2) {
   return(custom_geo)
 }
 
-write_geojson <- function(data, folder, filename,
-                          filename_prefix = NA, .delete_dsn = TRUE) {
+#' @title Write GeoJSON
+#' 
+#' @description Writes an sf object to a .geojson in a specified file path.
+#' 
+#' @param data An sf object.
+#' @param folder A string of the folder name.
+#' @param filename A string of the file name.
+#' @param filename_prefix A string of the file name prefix.
+#' @param .delete_dsn A logical value of whether to delete the dsn.
+#' 
+#' @return A .geojson file.
+#' 
+#' @importFrom here here
+#' @importFrom sf st_write
+#' 
+#' @export
+#' 
+write_geojson <- function(
+  data,
+  folder,
+  filename,
+  filename_prefix = NA,
+  .delete_dsn = TRUE
+) {
   "Writes an sf object to a .geojson in a specified file path."
 
   if (is.na(filename_prefix)) {
@@ -189,18 +233,28 @@ write_geojson <- function(data, folder, filename,
   }
 }
 
+#' @title Generate Bubbles
+#' 
+#' @description Generate bubbles from sf object for with info on the population and
+#' number of renter occupied households.
+#' 
+#' @param data An sf object.
+#' @param crs A coordinate reference system.
+#' 
+#' @return An sf object of the bubbles.
+#' 
+#' @importFrom dplyr select
+#' @importFrom sf st_point_on_surface st_transform
+#' 
+#' @export
+#'
 generate_bubbles <- function(data, crs = NA) {
-  "Generate bubbles from sf object for with info on the population and
-  number of renter occupied households."
-
   if (is.na(crs)) {
-    bubble <-
-      data |>
+    bubble <- data |>
       select(id, name, pop, rhh) |>
       st_point_on_surface()
   } else {
-    bubble <-
-      data |>
+    bubble <- data |>
       select(id, name, pop, rhh) |>
       st_transform(crs) |>
       st_point_on_surface()
@@ -209,14 +263,34 @@ generate_bubbles <- function(data, crs = NA) {
   return(bubble)
 }
 
-
-## Main Execution Function
-geographies_to_demographics_and_bubbles <- function(.state,
-                                                    .counties,
-                                                    .census_data_year,
-                                                    .census_survey,
-                                                    .custom_geographies,
-                                                    .filename_prefix) {
+#' @title Geographies to Demographics and Bubbles
+#' 
+#' @description Generate demographics and bubbles from geographies.
+#' 
+#' @param .state A string of the state name.
+#' @param .counties A vector of county names.
+#' @param .census_data_year A string of the census data year.
+#' @param .census_survey A string of the census survey.
+#' @param .custom_geographies A list of custom geographies.
+#' @param .filename_prefix A string of the file name prefix.
+#' 
+#' @return A list of sf objects.
+#' 
+#' @importFrom dplyr filter mutate rename select
+#' @importFrom here here
+#' @importFrom sf st_geometry_type st_make_valid st_set_crs st_set_geometry
+#' @importFrom tidyr pivot_longer
+#' 
+#' @export
+#'
+geographies_to_demographics_and_bubbles <- function(
+  .state,
+  .counties,
+  .census_data_year,
+  .census_survey,
+  .custom_geographies,
+  .filename_prefix
+) {
   .counties <- format_county_names(.counties)
 
   # Census Geographies
@@ -244,53 +318,54 @@ geographies_to_demographics_and_bubbles <- function(.state,
     rcb5 = "B25106_044"
   )
 
-  geographies_census_data <<-
-    map(
-      .x = geographies, # Into .geography
-      .f = get_acs_vars,
-      .state = .state,
-      .counties = .counties,
-      .variables = acs_vars,
-      .year = .census_data_year,
-      .survey = .census_survey,
-      .output = "wide",
-      .geometry = TRUE
-    ) |>
+  geographies_census_data <<- map(
+    .x = geographies, # Into .geography
+    .f = get_acs_vars,
+    .state = .state,
+    .counties = .counties,
+    .variables = acs_vars,
+    .year = .census_data_year,
+    .survey = .census_survey,
+    .output = "wide",
+    .geometry = TRUE
+  ) |>
     set_names(geographies)
 
-  census_tract_raw_data <<-
-    get_acs(
-      geography = "tract",
-      state = .state,
-      county = .counties,
-      variables = acs_vars,
-      year = .census_data_year,
-      survey = .census_survey,
-      output = "wide",
-      geometry = TRUE
-    ) %>%
-    mutate(
-      rcbE = rcb1E + rcb2E + rcb3E + rcb4E + rcb5E,
-      AreaTract = as.numeric(st_area(.))
-    )
+  census_tract_raw_data <<- get_acs(
+    geography = "tract",
+    state = .state,
+    county = .counties,
+    variables = acs_vars,
+    year = .census_data_year,
+    survey = .census_survey,
+    output = "wide",
+    geometry = TRUE
+  ) %>%
+  mutate(
+    rcbE = rcb1E + rcb2E + rcb3E + rcb4E + rcb5E,
+    AreaTract = as.numeric(st_area(.))
+  )
 
-  custom_geographies <<-
-    map(.x = .custom_geographies, .f = ~ sym(.x) |> eval()) |>
+  custom_geographies <<- map(
+    .x = .custom_geographies,
+    .f = ~ sym(.x) |> eval()
+  ) |>
     set_names(.custom_geographies)
 
   #### area-weighted interpolation of census tract data to custom geographies
-  custom_geographies_census_data <-
-    map(
-      .x = custom_geographies,
-      .f = custom_geo_interpolate_aw,
-      source = census_tract_raw_data,
-      .keep = 0.2
-    )
+  custom_geographies_census_data <- map(
+    .x = custom_geographies,
+    .f = custom_geo_interpolate_aw,
+    source = census_tract_raw_data,
+    .keep = 0.2
+  )
 
   all_geographies <<- append(geographies_census_data, custom_geographies_census_data)
 
   #### Export demographic data as geojson #####
-  filenames <- names(all_geographies) |> str_replace("zcta", "zip")
+  filenames <- names(all_geographies) |>
+    str_replace("zcta", "zip")
+
   map2(
     .x = all_geographies, # into data
     .y = filenames, # into filenames
@@ -301,7 +376,10 @@ geographies_to_demographics_and_bubbles <- function(.state,
   )
 
   #### Generate points with population data #####
-  bubbles <<- map(.x = all_geographies, .f = generate_bubbles)
+  bubbles <<- map(
+    .x = all_geographies,
+    .f = generate_bubbles
+  )
 
   #### Export population points to geojson #####
   map2(
