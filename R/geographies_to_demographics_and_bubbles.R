@@ -92,9 +92,8 @@ tribalLands <- st_read(
   mutate(
     tribal = TRIBAL_ARE |>
       str_to_title() |> 
-      tools::toTitleCase()) |>
-  mutate(
-    tribal = gsub("Indain", "Indian", tribal)
+      tools::toTitleCase() |>
+      str_replace("Indain", "Indian")
   ) |>
   select(
     name = tribal,
@@ -114,10 +113,10 @@ custom_geographies <- c(
 
 #### Main Function
 geographies_to_demographics_and_bubbles(
-  .state = "OK",
-  .counties = "tulsa",
-  .census_data_year = 2019,
-  .census_survey = "acs5",
-  .custom_geographies = custom_geographies,
-  .filename_prefix = "tulsa"
+  state = "OK",
+  counties = "tulsa",
+  census_data_year = 2019,
+  census_survey = "acs5",
+  custom_geographies = custom_geographies,
+  .prefix = "tulsa"
 )
