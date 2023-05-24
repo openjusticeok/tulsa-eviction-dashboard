@@ -1,0 +1,407 @@
+{
+  "appLogo": "app/assets/logo.svg",
+  "state": "Oklahoma",
+  "activeBubble": "efr",
+  "activeChoropleth": "mhi",
+  "activeRegion": "county",
+  "activeStartDate": "2021-01-01",
+  "activeEndDate": null,
+  "dateRange": ["2018-01-01", "2022-05-01"],
+  "zoom": 9,
+  "maxBounds": [
+    [-98.73, 34.69],
+    [-93.31, 37.47]
+  ],
+  "latitude": 36.16,
+  "longitude": -96,
+  "regions": [
+    {
+      "id": "county",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_county.geojson",
+          "options": {
+            "scaleFactor": 5
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_county.geojson"
+        }
+      ]
+    },
+    {
+      "id": "city",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_place.geojson",
+          "options": {
+            "scaleFactor": 2
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_place.geojson"
+        }
+      ]
+    },
+    {
+      "id": "zip",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_zip.geojson",
+          "options": {
+            "scaleFactor": 1.5
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_zip.geojson"
+        }
+      ]
+    },
+    {
+      "id": "council",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_city_council_districts.geojson",
+          "options": {
+            "scaleFactor": 1.5
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_city_council_districts.geojson"
+        }
+      ]
+    },
+    {
+      "id": "tract",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_tract.geojson",
+          "options": {
+            "scaleFactor": 1.1
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_tract.geojson"
+        }
+      ]
+    },
+    {
+      "id": "federal_house",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_federal_house_districts.geojson",
+          "options": {
+            "scaleFactor": 5
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_federal_house_districts.geojson"
+        }
+      ]
+    },
+    {
+      "id": "state_house",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_state_house_districts.geojson",
+          "options": {
+            "scaleFactor": 1.5
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_state_house_districts.geojson"
+        }
+      ]
+    },
+    {
+      "id": "state_senate",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_state_senate_districts.geojson",
+          "options": {
+            "scaleFactor": 2
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_state_senate_districts.geojson"
+        }
+      ]
+    },
+    {
+      "id": "judicial",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_judicial_districts.geojson",
+          "options": {
+            "scaleFactor": 2
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_judicial_districts.geojson"
+        }
+      ]
+    },
+    {
+      "id": "precinct",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_voting_precincts.geojson",
+          "options": {
+            "scaleFactor": 1.1
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_voting_precincts.geojson"
+        }
+      ]
+    },
+    {
+      "id": "school",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_school_districts.geojson",
+          "options": {
+            "scaleFactor": 2
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_school_districts.geojson"
+        }
+      ]
+    },
+    {
+      "id": "tribal",
+      "layers": [
+        {
+          "id": "bubble",
+          "type": "geojson",
+          "source": "bubble/tulsa_bubble_tribal_lands.geojson",
+          "options": {
+            "scaleFactor": 2
+          }
+        },
+        {
+          "id": "choropleth",
+          "type": "geojson",
+          "source": "demo/tulsa_demographics_tribal_lands.geojson"
+        }
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "id": "ef",
+      "type": "bubble",
+      "format": "integer"
+    },
+    {
+      "id": "efr",
+      "type": "bubble",
+      "format": "integer"
+    },
+    {
+      "id": "mgr",
+      "type": "choropleth",
+      "format": "currency",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "mhi",
+      "type": "choropleth",
+      "format": "currency",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "mpv",
+      "type": "choropleth",
+      "format": "currency",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "pca",
+      "type": "choropleth",
+      "format": "percent",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "pcb",
+      "type": "choropleth",
+      "format": "percent",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "pch",
+      "type": "choropleth",
+      "format": "percent",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "pcw",
+      "type": "choropleth",
+      "format": "percent",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "prh",
+      "type": "choropleth",
+      "format": "percent",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "pvr",
+      "type": "choropleth",
+      "format": "percent",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "cpr",
+      "type": "choropleth",
+      "format": "percent",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5,
+        "minQuantile": 0.01,
+        "maxQuantile": 0.99
+      }
+    },
+    {
+      "id": "rb",
+      "type": "choropleth",
+      "format": "percent",
+      "scale": "quantize",
+      "scaleOptions": {
+        "amount": 5
+      },
+      "unavailable": ["county"]
+    },
+    {
+      "id": "pop",
+      "type": "secondary",
+      "format": "integer"
+    },
+    {
+      "id": "rhh",
+      "type": "secondary",
+      "format": "integer"
+    },
+    {
+      "id": "avg7",
+      "type": "secondary",
+      "format": "perday"
+    },
+    {
+      "id": "avg30",
+      "type": "secondary",
+      "format": "perday"
+    }
+  ],
+  "lang": "en",
+  "langDict": {
+    "en": {
+      "APP_TITLE": "Tulsa Evictions",
+      "STATE": "Oklahoma",
+      "PARENT_MUNICIPALITY": "Tulsa",
+      "REGION_COUNTY": "Counties",
+      "REGION_CITY": "Cities",
+      "REGION_ZIP": "ZIP Codes",
+      "REGION_TRACT": "Census Tracts",
+      "REGION_COUNCIL": "Council Districts",
+      "REGION_PRECINCT": "Voting Precincts",
+      "REGION_FEDERAL_HOUSE": "Federal House Legislative Districts",
+      "REGION_STATE_HOUSE": "State House Legislative Districts",
+      "REGION_STATE_SENATE": "State Senate Legislative Districts",
+      "REGION_SCHOOL": "Public School Districts",
+      "REGION_JUDICIAL": "Judicial Districts",
+      "REGION_TRIBAL": "Tribal Lands"
+    }
+  }
+}
