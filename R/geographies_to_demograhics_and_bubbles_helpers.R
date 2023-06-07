@@ -108,22 +108,22 @@ get_acs_vars <- function(
 }
 
 #' @title Custom Geography Interpolate Area-Weighted
-#' 
+#'
 #' @description Area-weighted areal interpolation for a custom geogpraphy (from a user-provided sf)
 #' of a list of variables from another sf.
-#' 
+#'
 #' @param source An sf object of the source geography.
 #' @param target An sf object of the target geography.
 #' @param ... Placeholder for future arguments.
 #' @param .keep A numeric value of the simplification tolerance.
-#' 
+#'
 #' @return An sf object of the interpolated variables.
-#' 
+#'
 #' @importFrom dplyr filter mutate rename select
 #' @importFrom sf st_area st_intersection st_make_valid st_set_crs st_set_geometry
 #' @importFrom units set_units
 #' @importFrom purrr map
-#' 
+#'
 #' @export
 #'
 custom_geo_interpolate_aw <- function(source, target, ..., .keep = 0.2) {
@@ -196,23 +196,23 @@ custom_geo_interpolate_aw <- function(source, target, ..., .keep = 0.2) {
 }
 
 #' @title Write GeoJSON
-#' 
+#'
 #' @description Writes an sf object to a .geojson in a specified file path.
-#' 
+#'
 #' @param data An sf object.
 #' @param folder A string of the folder name.
 #' @param filename A string of the file name.
 #' @param ... Placeholder for future arguments.
 #' @param .prefix A string of the file name prefix.
 #' @param .delete_dsn A logical value of whether to delete the dsn.
-#' 
+#'
 #' @return A .geojson file.
-#' 
+#'
 #' @importFrom here here
 #' @importFrom sf st_write
-#' 
+#'
 #' @export
-#' 
+#'
 write_geojson <- function(
   data,
   folder,
@@ -239,18 +239,18 @@ write_geojson <- function(
 }
 
 #' @title Generate Bubbles
-#' 
+#'
 #' @description Generate bubbles from sf object for with info on the population and
 #' number of renter occupied households.
-#' 
+#'
 #' @param data An sf object.
 #' @param crs A coordinate reference system.
-#' 
+#'
 #' @return An sf object of the bubbles.
-#' 
+#'
 #' @importFrom dplyr select
 #' @importFrom sf st_point_on_surface st_transform
-#' 
+#'
 #' @export
 #'
 generate_bubbles <- function(data, crs = NA) {
@@ -269,9 +269,9 @@ generate_bubbles <- function(data, crs = NA) {
 }
 
 #' @title Geographies to Demographics and Bubbles
-#' 
+#'
 #' @description Generate demographics and bubbles from geographies.
-#' 
+#'
 #' @param state A string of the state name.
 #' @param counties A vector of county names.
 #' @param census_data_year A string of the census data year.
@@ -279,14 +279,14 @@ generate_bubbles <- function(data, crs = NA) {
 #' @param custom_geographies A list of custom geographies.
 #' @param ... Placeholder for future arguments.
 #' @param .prefix A string of the file name prefix.
-#' 
+#'
 #' @return A list of sf objects.
-#' 
+#'
 #' @importFrom dplyr filter mutate rename select
 #' @importFrom here here
 #' @importFrom sf st_geometry_type st_make_valid st_set_crs st_set_geometry
 #' @importFrom tidyr pivot_longer
-#' 
+#'
 #' @export
 #'
 geographies_to_demographics_and_bubbles <- function(
@@ -353,7 +353,7 @@ geographies_to_demographics_and_bubbles <- function(
     AreaTract = as.numeric(st_area(.))
   )
 
-  custom_geographies <<- map(
+  custom_geographies_data <- map(
     .x = custom_geographies,
     .f = ~ sym(.x) |> eval()
   ) |>
@@ -361,7 +361,7 @@ geographies_to_demographics_and_bubbles <- function(
 
   #### area-weighted interpolation of census tract data to custom geographies
   custom_geographies_census_data <- map(
-    .x = custom_geographies,
+    .x = custom_geographies_data,
     .f = custom_geo_interpolate_aw,
     source = census_tract_raw_data,
     .keep = 0.2
@@ -381,7 +381,7 @@ geographies_to_demographics_and_bubbles <- function(
     .y = filenames, # into filenames
     .f = write_geojson,
     folder = "demo",
-    .prefix = paste0(.filename_prefix, "_demographics_"),
+    .prefix = paste0(.prefix, "_demographics_"),
     .delete_dsn = TRUE
   )
 

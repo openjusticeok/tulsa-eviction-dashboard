@@ -83,7 +83,7 @@ voting_precincts <- voting_districts(state = "OK") |>
   select(id, name)
 
 ## Tribal Lands
-tribalLands <- st_read(
+tribal_lands <- st_read(
   dsn = here("data/shapefiles/tribal_boundaries/Tribal_Boundaries.shp")
 ) |>
   st_transform(crs = 4269) |>
@@ -91,7 +91,7 @@ tribalLands <- st_read(
   filter(!is.na(TRIBAL_NAM)) |> # Filter for only federally recognized tribal areas.
   mutate(
     tribal = TRIBAL_ARE |>
-      str_to_title() |> 
+      str_to_title() |>
       tools::toTitleCase() |>
       str_replace("Indain", "Indian")
   ) |>
@@ -108,7 +108,8 @@ custom_geographies <- c(
   "federal_house_districts",
   "state_senate_districts",
   "state_house_districts",
-  "voting_precincts"
+  "voting_precincts",
+  "tribal_lands"
 )
 
 #### Main Function
