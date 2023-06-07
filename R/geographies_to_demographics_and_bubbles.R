@@ -21,65 +21,107 @@ options(tigris_use_cache = TRUE)
 
 #### Requested Custom Geographies
 ## City Council Districts
-city_council_districts <-
-  st_read(here("data/shapefiles/council_districts/Council_Districts.shp")) |>
-  select(id = DISTRICTID, geometry) |>
-  mutate(name = paste("Council District", id)) |>
+city_council_districts <- st_read(
+  here("data/shapefiles/council_districts/Council_Districts.shp")
+) |>
+  select(
+    id = DISTRICTID,
+    geometry
+  ) |>
+  mutate(
+    name = paste("Council District", id)
+  ) |>
   st_transform(crs = 4269) |>
   st_make_valid()
+
 ## Oklahoma Public School Districts Shapefiles
-school_districts <-
-  st_read(here("data/shapefiles/school_districts/School_Districts.shp")) |>
+school_districts <- st_read(
+  here("data/shapefiles/school_districts/School_Districts.shp")
+) |>
   select(id = SD_CODE, name = SD_NAME, geometry) |>
   st_transform(crs = 4269) |>
   st_make_valid()
+
 ## Judicial Districts
-judicial_districts <-
-  st_read(here("data/shapefiles/judicial_districts/Judicial_Districts.shp")) |>
-  mutate(id = DISTRICT, name = paste("Judicial District", DISTRICT)) |>
+judicial_districts <- st_read(
+  here("data/shapefiles/judicial_districts/Judicial_Districts.shp")
+) |>
+  mutate(
+    id = DISTRICT,
+    name = paste("Judicial District", DISTRICT)
+  ) |>
   select(id, name) |>
   st_make_valid() |>
   st_transform(crs = 4269)
 
 #### Not-requested Custom Geographies (just in case)
 ## Federal Legislative Districts
-federal_house_districts <-
-  congressional_districts(state = "OK") |>
+federal_house_districts <- congressional_districts(
+  state = "OK"
+) |>
   select(id = GEOID, name = NAMELSAD)
+
 ## State Legislative Districts
-state_senate_districts <-
-  state_legislative_districts(state = "OK", house = "upper") |>
+state_senate_districts <- state_legislative_districts(
+  state = "OK",
+  house = "upper"
+) |>
   select(id = GEOID, name = NAMELSAD)
-state_house_districts <-
-  state_legislative_districts(state = "OK", house = "lower") |>
+
+state_house_districts <- state_legislative_districts(
+  state = "OK",
+  house = "lower"
+) |>
   select(id = GEOID, name = NAMELSAD)
+
 ## Voting Precincts
-voting_precincts <-
-  voting_districts(state = "OK") |>
-  mutate(id = GEOID20, name = paste("Voting Precinct", NAMELSAD20)) |>
+voting_precincts <- voting_districts(state = "OK") |>
+  mutate(
+    id = GEOID20,
+    name = paste("Voting Precinct", NAMELSAD20)
+  ) |>
   select(id, name)
+
 ## Tribal Lands
-tribalLands <-
-  st_read(here("data/shapefiles/tribal_boundaries/Tribal_Boundaries.shp")) |>
+tribal_lands <- st_read(
+  dsn = here("data/shapefiles/tribal_boundaries/Tribal_Boundaries.shp")
+) |>
   st_transform(crs = 4269) |>
   st_make_valid() |>
   filter(!is.na(TRIBAL_NAM)) |> # Filter for only federally recognized tribal areas.
-  mutate(tribal = TRIBAL_ARE |> str_to_title() |>  tools::toTitleCase()) |>
-  mutate(tribal = gsub("Indain", "Indian", tribal)) |>
-  select(name = tribal, id = TRIBAL_UTM, tribal_nation = TRIBAL_NAM)
+  mutate(
+    tribal = TRIBAL_ARE |>
+      str_to_title() |>
+      tools::toTitleCase() |>
+      str_replace("Indain", "Indian")
+  ) |>
+  select(
+    name = tribal,
+    id = TRIBAL_UTM,
+    tribal_nation = TRIBAL_NAM
+  ) |>
+  # Only Two in Tulsa County (Border of Osage is included otherwise)
+  filter(
+    tribal_nation %in% c("Cherokee Nation", "Muscogee (Creek) Nation")
+  )
 
 custom_geographies <- c(
-  "city_council_districts", "school_districts", "judicial_districts",
-  "federal_house_districts", "state_senate_districts", "state_house_districts",
-  "voting_precincts"
-  )
+  "city_council_districts",
+  "school_districts",
+  "judicial_districts",
+  "federal_house_districts",
+  "state_senate_districts",
+  "state_house_districts",
+  "voting_precincts",
+  "tribal_lands"
+)
 
 #### Main Function
 geographies_to_demographics_and_bubbles(
-  .state = "OK",
-  .counties = "tulsa",
-  .census_data_year = 2019,
-  .census_survey = "acs5",
-  .custom_geographies = custom_geographies,
-  .filename_prefix = "tulsa"
+  state = "OK",
+  counties = "tulsa",
+  census_data_year = 2019,
+  census_survey = "acs5",
+  custom_geographies = custom_geographies,
+  .prefix = "tulsa"
 )

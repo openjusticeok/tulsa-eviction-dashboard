@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "tulsa_bubble_tribal_lands",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 5.0, "name": "Cherokee Nation, Oklahoma", "pop": 123862.2981, "rhh": 17932.2746 }, "geometry": { "type": "Point", "coordinates": [ -95.906776930570501, 36.29340455 ] } },
+{ "type": "Feature", "properties": { "id": 19.0, "name": "Muscogee (Creek) Nation, Oklahoma", "pop": 522493.4075, "rhh": 86123.7924 }, "geometry": { "type": "Point", "coordinates": [ -95.895590151495313, 36.0178875 ] } }
+]
+}

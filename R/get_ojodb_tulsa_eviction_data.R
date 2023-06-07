@@ -37,7 +37,10 @@ data <- data |>
     )
 
 ## Save Data
-data |>  show_query()
-data <- data |> collect()
+data |> 
+    show_query()
+
+data <- data |>
+    ojo_collect()
 
 write_csv(data, file = here("data/tulsaEvictionData.csv"))
