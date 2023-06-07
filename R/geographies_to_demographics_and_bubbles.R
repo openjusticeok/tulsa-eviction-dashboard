@@ -99,6 +99,10 @@ tribal_lands <- st_read(
     name = tribal,
     id = TRIBAL_UTM,
     tribal_nation = TRIBAL_NAM
+  ) |>
+  # Only Two in Tulsa County (Border of Osage is included otherwise)
+  filter(
+    tribal_nation %in% c("Cherokee Nation", "Muscogee (Creek) Nation")
   )
 
 custom_geographies <- c(
