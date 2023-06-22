@@ -372,6 +372,15 @@ geographies_to_demographics_and_bubbles <- function(
     custom_geographies_census_data
   )
 
+  #### Rename Some of the Census Geographies "Name" columns
+  all_geographies[["place"]] <- all_geographies[["place"]] |>
+    filter(!str_detect(name, "CDP")) |>
+    mutate(name = str_replace(name, " (city|town)", ""))
+  all_geographies[["tract"]] <- all_geographies[["tract"]] |>
+    mutate(name = str_replace(name, ", Tulsa County, Oklahoma", ""))
+  all_geographies[["zcta"]] <- all_geographies[["zcta"]] |>
+    mutate(name = str_replace_all(name, "ZCTA5 ", ""))
+
   #### Export demographic data as geojson #####
   filenames <- names(all_geographies) |>
     str_replace("zcta", "zip")

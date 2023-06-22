@@ -29,7 +29,7 @@ city_council_districts <- st_read(
     geometry
   ) |>
   mutate(
-    name = paste("Council District", id)
+    name = paste("City Council District", id)
   ) |>
   st_transform(crs = 4269) |>
   st_make_valid()
@@ -39,6 +39,7 @@ school_districts <- st_read(
   here("data/shapefiles/school_districts/School_Districts.shp")
 ) |>
   select(id = SD_CODE, name = SD_NAME, geometry) |>
+  mutate(name = paste(name, "Public Schools")) |>
   st_transform(crs = 4269) |>
   st_make_valid()
 
@@ -59,7 +60,8 @@ judicial_districts <- st_read(
 federal_house_districts <- congressional_districts(
   state = "OK"
 ) |>
-  select(id = GEOID, name = NAMELSAD)
+  select(id = GEOID, name = NAMELSAD) |>
+  filter(name == "Congressional District 1") # Remove boundaries of other districts
 
 ## State Legislative Districts
 state_senate_districts <- state_legislative_districts(
@@ -78,7 +80,7 @@ state_house_districts <- state_legislative_districts(
 voting_precincts <- voting_districts(state = "OK") |>
   mutate(
     id = GEOID20,
-    name = paste("Voting Precinct", NAMELSAD20)
+    name = paste("Precinct", NAMELSAD20)
   ) |>
   select(id, name)
 
@@ -96,14 +98,14 @@ tribal_lands <- st_read(
       str_replace("Indain", "Indian")
   ) |>
   select(
-    name = tribal,
+    name = TRIBAL_NAM,
     id = TRIBAL_UTM,
-    tribal_nation = TRIBAL_NAM
   ) |>
   # Only Two in Tulsa County (Border of Osage is included otherwise)
   filter(
-    tribal_nation %in% c("Cherokee Nation", "Muscogee (Creek) Nation")
-  )
+    name %in% c("Cherokee Nation", "Muscogee (Creek) Nation")
+  ) |>
+  mutate(name = paste(name, "Reservation"))
 
 custom_geographies <- c(
   "city_council_districts",

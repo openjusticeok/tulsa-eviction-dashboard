@@ -3,6 +3,7 @@ library(dplyr) # Data wrangling/cleaning
 library(tidyr) # Data wrangling
 library(stringr) # String manipulation
 library(readr) # For reading/writing data
+library(purrr) # For reading/writing data
 library(ggplot2) # Data visualization
 library(forcats) # Working with factors
 library(lubridate) # Dealing with dates
@@ -52,6 +53,7 @@ data |>
   )
 
 ## Filter data for those not missing location data and for accuracy >=.85
+# 6/8/2023: 22.7% Combined
 data <- data |>
   filter(
     !is.na(lat),
@@ -129,7 +131,8 @@ data_sf <- st_as_sf(
 )
 
 # Provide additional geographic filter to ensure data are within Tulsa County
-# Number of cases to be excluded with filter
+# Number of cases to be excluded with filter:
+  # 6/8/2023: 528
 st_disjoint(
   data_sf,
   county,

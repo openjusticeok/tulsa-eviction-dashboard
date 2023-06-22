@@ -22,4 +22,4 @@ The following describes the order to run the analysis from start to finish.
 1) R/ojodb_tulsa_evictionData.R
    Output: data/tulsaEvictionData.csv
 2) R/coordinatesToGeographies.R
-   Output: data/tulsa_eviction_cases.csv
+   Output: data/tulsa_eviction_cases.csv, data/tulsa_datadownload.csv
