@@ -1,7 +1,7 @@
 library(here)
 library(tidyverse)
 
-data <- read_csv(here("data/tulsaEvictionData.csv"))
+data <- read_csv(here("data/tulsa_eviction_data.csv"))
 # This are the cases with location data ONLY. Not all of them
 data_with_locations <- read_csv(here("data/tulsa_eviction_cases.csv"))
 

@@ -20,6 +20,6 @@ and places those cases within different geographic levels. The levels available 
 
 The following describes the order to run the analysis from start to finish.
 1) R/ojodb_tulsa_evictionData.R
-   Output: data/tulsaEvictionData.csv
+   Output: data/tulsa_eviction_data.csv
 2) R/coordinatesToGeographies.R
-   Output: data/tulsa_eviction_cases.csv, data/tulsa_datadownload.csv
+   Output: data/tulsa_eviction_cases.csv, data/tulsa_data_download.csv

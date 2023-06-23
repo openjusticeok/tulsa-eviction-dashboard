@@ -17,29 +17,28 @@ library(leaflet)
 library(ojodb) # Working with OJO data
 
 
-## Load locationData
-locationData <- ojo_tbl("address", schema = "eviction_addresses") |>
+## Load location_data
+location_data <- ojo_tbl("address", schema = "eviction_addresses") |>
   select(case, lat, lon, geo_accuracy) |>
   ojo_collect()
 
 ## Check histogram of geo_accuracy to determine reasonable cutoff
-locationData |>
+location_data |>
   ggplot(aes(x = geo_accuracy)) +
     geom_histogram() +
     geom_vline(xintercept = 0.85)
 
 ## Load Tulsa County Eviction Case Data
-caseData <- read_csv(here("data/tulsaEvictionData.csv"))
+case_data <- read_csv(here("data/tulsa_eviction_data.csv"))
 
-## Left join locationData to caseData
-data <- caseData |>
+## Left join location_data to case_data
+data <- case_data |>
   left_join(
-    locationData,
+    location_data,
     by = c("id" = "case")
   )
 
 ## Get Number and Percent for cases that have don't have an address or have a bad accuracy score
-# 4/17/2023; 23% of cases either have missing addresses or bad location accuracy.
 data |>
   summarise(
     count_NA = sum(is.na(lat)),
@@ -53,7 +52,6 @@ data |>
   )
 
 ## Filter data for those not missing location data and for accuracy >=.85
-# 6/8/2023: 22.7% Combined
 data <- data |>
   filter(
     !is.na(lat),
@@ -66,26 +64,26 @@ county <- counties(state = "OK") |>
   filter(GEOID == "40143")
 
 ## Cities/Towns
-citiesAndTowns <- places(state = "OK")
+cities <- places(state = "OK")
 
 ## ZIP Codes
-zipCodes <- zctas(
+zip_codes <- zctas(
   state = "OK",
   year = 2010
 ) # Not the latest 2020 ZCTAs from what I've seen (https://www.census.gov/geographies/mapping-files/2020/geo/tiger-line-file.html).
 
 ## Census Tracts
-censusTracts <- tracts(state = "OK")
+census_tracts <- tracts(state = "OK")
 
 ## Federal Legislative Districts
-federalHouse <- congressional_districts(state = "OK")
+federal_house <- congressional_districts(state = "OK")
 
 ## State Legislative Districts
-stateSenate <- state_legislative_districts(state = "OK", house = "upper")
-stateHouse <- state_legislative_districts(state = "OK", house = "lower")
+state_senate <- state_legislative_districts(state = "OK", house = "upper")
+state_house <- state_legislative_districts(state = "OK", house = "lower")
 
 ## Voting Precincts
-votingPrecincts <- voting_districts(state = "OK")
+voting_precincts <- voting_districts(state = "OK")
 
 ##City Council Districts
 cityCouncilDistricts <- st_read(
@@ -95,7 +93,7 @@ cityCouncilDistricts <- st_read(
   st_make_valid()
 
 ## Judicial Districts
-judicialDistricts <- st_read(
+judicial_districts <- st_read(
   here("data/shapefiles/judicial_districts/Judicial_Districts.shp")
 ) |>
   st_transform(crs = 4269) |>
@@ -110,7 +108,7 @@ schoolDistricts <- st_read(
   st_make_valid()
 
 ## Tribal Lands
-tribalLands <- st_read(
+tribal_lands <- st_read(
   here("data/shapefiles/tribal_boundaries/Tribal_Boundaries.shp")
 ) |>
   st_transform(crs = 4269) |>
@@ -151,7 +149,6 @@ data_sf <- data_sf |>
       as.logical()
   )
 
-
 ## Create variables containing each cases location within every geographic level
 data_sf <- data_sf |>
   select(
@@ -170,7 +167,7 @@ data_sf <- data_sf |>
   ) |>
   # Voting Precincts
   st_join(
-    votingPrecincts |>
+    voting_precincts |>
       select(
         precinct = NAMELSAD20,
         precinct_id = GEOID20
@@ -178,7 +175,7 @@ data_sf <- data_sf |>
   ) |>
   ## Census Tracts
   st_join(
-    censusTracts |>
+    census_tracts |>
       select(
         tract = NAMELSAD,
         tract_id = GEOID
@@ -186,14 +183,14 @@ data_sf <- data_sf |>
   ) |>
   ## ZIP Codes
   st_join(
-    zipCodes |>
+    zip_codes |>
       select(
         zip_id = ZCTA5CE10
       )
   ) |>
   ## Cities/Towns
   st_join(
-    citiesAndTowns |>
+    cities |>
       mutate(
         municipal_designation = str_extract(
           NAMELSAD,
@@ -226,7 +223,7 @@ data_sf <- data_sf |>
   ) |>
   # Federal Legislative District
   st_join(
-    federalHouse |>
+    federal_house |>
       select(
         federal_house = NAMELSAD,
         federal_house_id = GEOID
@@ -234,14 +231,14 @@ data_sf <- data_sf |>
   ) |>
   # State Legislative Districts (House and Senate)
   st_join(
-    stateHouse |>
+    state_house |>
       select(
         state_house = NAMELSAD,
         state_house_id = GEOID
       )
   ) |>
   st_join(
-    stateSenate |>
+    state_senate |>
       select(
         state_senate = NAMELSAD,
         state_senate_id = GEOID
@@ -249,7 +246,7 @@ data_sf <- data_sf |>
   ) |>
   # Judicial Precincts
   st_join(
-    judicialDistricts |>
+    judicial_districts |>
       mutate(
         judicial = paste("Judicial District", DISTRICT)
       ) |>
@@ -260,7 +257,7 @@ data_sf <- data_sf |>
   ) |>
   # Tribal Lands
   st_join(
-    tribalLands |>
+    tribal_lands |>
       mutate(
         tribal = TRIBAL_ARE |>
           str_to_title() |>
@@ -279,7 +276,7 @@ data_sf <- data_sf |>
 ### Mapping Example of 5000 Addresses
 # Coordinates to sf
 mapview(
-  votingPrecincts |>
+  voting_precincts |>
     filter(COUNTYFP20 == "143"),
   color = "purple4",
   lwd = 2,
@@ -302,7 +299,7 @@ mapview(
   alpha.regions = 0.05
 ) +
 mapview(
-  data_sf[1:5000,],
+  data_sf[1:5000, ],
   col.regions = "cyan"
 )
 
@@ -320,7 +317,6 @@ data_sf <- data_sf |>
 id_columns <- data_sf |>
   as_tibble() |>
   select(
-    -geometry,
     ends_with("id")
   ) |>
   names() |>
@@ -328,7 +324,6 @@ id_columns <- data_sf |>
     pattern = "city_id",
     replacement = "city"
   )
-
 
 pivot_geography_longer <- function(data, id_column) {
   geography <- id_column |>
@@ -357,8 +352,9 @@ pivot_geography_longer <- function(data, id_column) {
 
 data_sf_longer <- map(
   .x = id_columns,
-  .f = pivot_geography_longer,
-  data = data_sf
+  .f = function(id) {
+    pivot_geography_longer(data_sf, id)
+  }
 ) |>
   bind_rows() |>
   as_tibble() |>
@@ -366,5 +362,5 @@ data_sf_longer <- map(
 
 write_csv(
   data_sf_longer,
-  here("data/tulsa_datadownload.csv")
+  here("data/tulsa_data_download.csv")
 )
