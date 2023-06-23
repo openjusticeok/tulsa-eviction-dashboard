@@ -16,6 +16,7 @@ library(mapview)
 library(leaflet)
 library(ojodb) # Working with OJO data
 
+options(tigris_use_cache = TRUE)
 
 ## Load location_data
 location_data <- ojo_tbl("address", schema = "eviction_addresses") |>
@@ -86,7 +87,7 @@ state_house <- state_legislative_districts(state = "OK", house = "lower")
 voting_precincts <- voting_districts(state = "OK")
 
 ##City Council Districts
-cityCouncilDistricts <- st_read(
+city_council_districts <- st_read(
   here("data/shapefiles/council_districts/Council_Districts.shp")
 ) |>
   st_transform(crs = 4269) |>
@@ -100,8 +101,8 @@ judicial_districts <- st_read(
   st_make_valid()
 
 ## Oklahoma Public School Districts Shapefiles
-# schoolDistricts <- school_districts(state = "OK", year = 2018) # This is missing 1 county we need :(
-schoolDistricts <- st_read(
+# school_districts <- school_districts(state = "OK", year = 2018) # This is missing 1 county we need :(
+school_districts <- st_read(
   here("data/shapefiles/school_districts/School_Districts.shp")
 ) |>
   st_transform(crs = 4269) |>
@@ -116,7 +117,7 @@ tribal_lands <- st_read(
   filter(!is.na(TRIBAL_NAM)) # Filter for only federally recognized tribal areas.
 
 # Filter to the 14 districts that at least partially fall into Tulsa County
-schoolDistricts <- schoolDistricts |>
+school_districts <- school_districts |>
   filter(COUNTY == "Tulsa")
 
 # Convert eviction data to sf object
@@ -205,7 +206,7 @@ data_sf <- data_sf |>
   ) |>
   # City Council District
   st_join(
-    cityCouncilDistricts |>
+    city_council_districts |>
       mutate(
         council = paste("Tulsa City Council", NAME)
       ) |>
@@ -215,7 +216,7 @@ data_sf <- data_sf |>
   ) |>
   # Tulsa County Public School Districts
   st_join(
-    schoolDistricts |>
+    school_districts |>
       select(
         school = SD_NAME,
         school_id = SD_CODE
