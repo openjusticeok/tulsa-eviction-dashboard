@@ -22,7 +22,7 @@
 { "type": "Feature", "properties": { "id": "40073", "name": "State House District 73", "pop": 29576.3014, "rhh": 6494.0196 }, "geometry": { "type": "Point", "coordinates": [ -95.979723428231111, 36.1961965 ] } },
 { "type": "Feature", "properties": { "id": "40074", "name": "State House District 74", "pop": 27284.366, "rhh": 3220.1976 }, "geometry": { "type": "Point", "coordinates": [ -95.839221486644405, 36.2939645 ] } },
 { "type": "Feature", "properties": { "id": "40075", "name": "State House District 75", "pop": 50203.0231, "rhh": 10236.7972 }, "geometry": { "type": "Point", "coordinates": [ -95.833065522603334, 36.09737575 ] } },
-{ "type": "Feature", "properties": { "id": "40076", "name": "State House District 76", "pop": 36984.6291, "rhh": 2916.233 }, "geometry": { "type": "Point", "coordinates": [ -95.824222435387611, 36.046379 ] } },
+{ "type": "Feature", "properties": { "id": "40076", "name": "State House District 76", "pop": 36984.6292, "rhh": 2916.233 }, "geometry": { "type": "Point", "coordinates": [ -95.824222435387611, 36.046379 ] } },
 { "type": "Feature", "properties": { "id": "40077", "name": "State House District 77", "pop": 37438.1669, "rhh": 6271.8575 }, "geometry": { "type": "Point", "coordinates": [ -95.868886481934581, 36.1988815 ] } },
 { "type": "Feature", "properties": { "id": "40078", "name": "State House District 78", "pop": 36913.7585, "rhh": 6940.8601 }, "geometry": { "type": "Point", "coordinates": [ -95.896170249501509, 36.129306 ] } },
 { "type": "Feature", "properties": { "id": "40079", "name": "State House District 79", "pop": 37941.9293, "rhh": 10006.1641 }, "geometry": { "type": "Point", "coordinates": [ -95.904384433831737, 36.0787515 ] } },

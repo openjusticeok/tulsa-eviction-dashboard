@@ -10,7 +10,7 @@
 { "type": "Feature", "properties": { "id": "5", "name": "City Council District 5", "pop": 47638.6726, "rhh": 10196.0965 }, "geometry": { "type": "Point", "coordinates": [ -95.890994109060017, 36.11892945 ] } },
 { "type": "Feature", "properties": { "id": "6", "name": "City Council District 6", "pop": 41818.2892, "rhh": 6423.1998 }, "geometry": { "type": "Point", "coordinates": [ -95.806372490112437, 36.1262413 ] } },
 { "type": "Feature", "properties": { "id": "7", "name": "City Council District 7", "pop": 50113.4858, "rhh": 11779.5874 }, "geometry": { "type": "Point", "coordinates": [ -95.877643157141051, 36.06814275 ] } },
-{ "type": "Feature", "properties": { "id": "8", "name": "City Council District 8", "pop": 45167.7904, "rhh": 6378.0186 }, "geometry": { "type": "Point", "coordinates": [ -95.913524542516043, 36.02168155 ] } },
+{ "type": "Feature", "properties": { "id": "8", "name": "City Council District 8", "pop": 45167.7904, "rhh": 6378.0187 }, "geometry": { "type": "Point", "coordinates": [ -95.913524542516043, 36.02168155 ] } },
 { "type": "Feature", "properties": { "id": "9", "name": "City Council District 9", "pop": 44746.8828, "rhh": 10073.747 }, "geometry": { "type": "Point", "coordinates": [ -95.955265615036367, 36.089871 ] } }
 ]
 }
