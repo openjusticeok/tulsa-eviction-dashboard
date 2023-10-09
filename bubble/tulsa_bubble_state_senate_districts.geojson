@@ -17,6 +17,6 @@
 { "type": "Feature", "properties": { "id": "40035", "name": "State Senate District 35", "pop": 75714.2084, "rhh": 18711.6859 }, "geometry": { "type": "Point", "coordinates": [ -95.962208694061303, 36.07168 ] } },
 { "type": "Feature", "properties": { "id": "40036", "name": "State Senate District 36", "pop": 66541.4948, "rhh": 11853.0936 }, "geometry": { "type": "Point", "coordinates": [ -95.815151093924285, 36.092359 ] } },
 { "type": "Feature", "properties": { "id": "40037", "name": "State Senate District 37", "pop": 82936.7462, "rhh": 11228.3896 }, "geometry": { "type": "Point", "coordinates": [ -96.004200381229225, 36.0603865 ] } },
-{ "type": "Feature", "properties": { "id": "40039", "name": "State Senate District 39", "pop": 79393.4199, "rhh": 15004.7561 }, "geometry": { "type": "Point", "coordinates": [ -95.922252362834655, 36.091221 ] } }
+{ "type": "Feature", "properties": { "id": "40039", "name": "State Senate District 39", "pop": 79393.4199, "rhh": 15004.756 }, "geometry": { "type": "Point", "coordinates": [ -95.922252362834655, 36.091221 ] } }
 ]
 }

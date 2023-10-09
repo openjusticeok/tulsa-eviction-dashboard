@@ -43,3 +43,6 @@ vignettes/*.pdf
 
 # Secrets directory for secrets
 /secrets/
+
+# Hide sandbox folder
+sandbox/
