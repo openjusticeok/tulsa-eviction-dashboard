@@ -1,5 +1,6 @@
 {
   "appLogo": "app/assets/logo.svg",
+  "appLogoUrl": "https://openjustice.okpolicy.org/",
   "state": "Oklahoma",
   "activeBubble": "efr",
   "activeChoropleth": "mhi",
