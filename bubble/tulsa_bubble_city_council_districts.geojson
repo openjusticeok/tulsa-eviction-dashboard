@@ -3,14 +3,14 @@
 "name": "tulsa_bubble_city_council_districts",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
 "features": [
-{ "type": "Feature", "properties": { "id": "1", "name": "City Council District 1", "pop": 36502.177, "rhh": 7179.9753 }, "geometry": { "type": "Point", "coordinates": [ -95.961862009792952, 36.198504 ] } },
-{ "type": "Feature", "properties": { "id": "2", "name": "City Council District 2", "pop": 41426.345, "rhh": 11224.5577 }, "geometry": { "type": "Point", "coordinates": [ -95.997896529307553, 36.0727809 ] } },
-{ "type": "Feature", "properties": { "id": "3", "name": "City Council District 3", "pop": 45037.0474, "rhh": 7609.5182 }, "geometry": { "type": "Point", "coordinates": [ -95.842110104514404, 36.1870567 ] } },
-{ "type": "Feature", "properties": { "id": "4", "name": "City Council District 4", "pop": 41021.0391, "rhh": 8909.2189 }, "geometry": { "type": "Point", "coordinates": [ -95.961912975748476, 36.1399711 ] } },
-{ "type": "Feature", "properties": { "id": "5", "name": "City Council District 5", "pop": 47638.6723, "rhh": 10196.0965 }, "geometry": { "type": "Point", "coordinates": [ -95.890994109060017, 36.11892945 ] } },
-{ "type": "Feature", "properties": { "id": "6", "name": "City Council District 6", "pop": 41818.2892, "rhh": 6423.1998 }, "geometry": { "type": "Point", "coordinates": [ -95.806372490112437, 36.1262413 ] } },
-{ "type": "Feature", "properties": { "id": "7", "name": "City Council District 7", "pop": 50113.4858, "rhh": 11779.5874 }, "geometry": { "type": "Point", "coordinates": [ -95.877643157141051, 36.06814275 ] } },
-{ "type": "Feature", "properties": { "id": "8", "name": "City Council District 8", "pop": 45167.7904, "rhh": 6378.0186 }, "geometry": { "type": "Point", "coordinates": [ -95.913524542516043, 36.02168155 ] } },
-{ "type": "Feature", "properties": { "id": "9", "name": "City Council District 9", "pop": 44746.8828, "rhh": 10073.747 }, "geometry": { "type": "Point", "coordinates": [ -95.955265615036367, 36.089871 ] } }
+{ "type": "Feature", "properties": { "id": "1", "name": "City Council District 1", "pop": 36499.3325, "rhh": 7178.9567 }, "geometry": { "type": "Point", "coordinates": [ -95.961859953022213, 36.198504 ] } },
+{ "type": "Feature", "properties": { "id": "2", "name": "City Council District 2", "pop": 41433.2781, "rhh": 11227.0068 }, "geometry": { "type": "Point", "coordinates": [ -95.997892229364567, 36.0727875 ] } },
+{ "type": "Feature", "properties": { "id": "3", "name": "City Council District 3", "pop": 45027.1224, "rhh": 7607.6298 }, "geometry": { "type": "Point", "coordinates": [ -95.842105835792538, 36.18706325 ] } },
+{ "type": "Feature", "properties": { "id": "4", "name": "City Council District 4", "pop": 41019.3557, "rhh": 8909.1795 }, "geometry": { "type": "Point", "coordinates": [ -95.961908668034624, 36.13997735 ] } },
+{ "type": "Feature", "properties": { "id": "5", "name": "City Council District 5", "pop": 47638.949, "rhh": 10195.6336 }, "geometry": { "type": "Point", "coordinates": [ -95.890987452872309, 36.118936149999989 ] } },
+{ "type": "Feature", "properties": { "id": "6", "name": "City Council District 6", "pop": 41811.6217, "rhh": 6421.9436 }, "geometry": { "type": "Point", "coordinates": [ -95.806370365385874, 36.12624465 ] } },
+{ "type": "Feature", "properties": { "id": "7", "name": "City Council District 7", "pop": 50112.6753, "rhh": 11780.4466 }, "geometry": { "type": "Point", "coordinates": [ -95.877638807084594, 36.0681495 ] } },
+{ "type": "Feature", "properties": { "id": "8", "name": "City Council District 8", "pop": 45171.7894, "rhh": 6378.7467 }, "geometry": { "type": "Point", "coordinates": [ -95.913520187882028, 36.02168825 ] } },
+{ "type": "Feature", "properties": { "id": "9", "name": "City Council District 9", "pop": 44747.9899, "rhh": 10073.0523 }, "geometry": { "type": "Point", "coordinates": [ -95.955261342572356, 36.08987765 ] } }
 ]
 }

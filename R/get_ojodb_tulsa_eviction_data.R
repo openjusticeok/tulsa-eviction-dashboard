@@ -4,6 +4,7 @@ library(dplyr) # Data wrangling/cleaning
 library(readr) # For reading/writing data
 library(ojodb) # Working with OJO data
 library(lubridate) # Dealing with dates
+library(logger) # Logging
 
 get_ojodb_tulsa_eviction_data <- function() {
   ##### Data Wrangling / Cleaning
@@ -11,6 +12,8 @@ get_ojodb_tulsa_eviction_data <- function() {
   ## Construct Data
   # Tulsa Small Claims Data from Jan. 2018 to Last Day of Previous Month
   last_day_of_previous_month <- rollback(today())
+  log_info("Using court data from 2018-01-01 to {last_day_of_previous_month}")
+
 
   data <- ojo_tbl("case") |>
       filter(

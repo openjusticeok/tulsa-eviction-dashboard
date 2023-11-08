@@ -3,10 +3,10 @@
 "name": "tulsa_bubble_judicial_districts",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
 "features": [
-{ "type": "Feature", "properties": { "id": "1", "name": "Judicial District 1", "pop": 114337.1172, "rhh": 22996.7144 }, "geometry": { "type": "Point", "coordinates": [ -95.924671706875344, 36.1262025 ] } },
-{ "type": "Feature", "properties": { "id": "2", "name": "Judicial District 2", "pop": 206089.4903, "rhh": 24684.2404 }, "geometry": { "type": "Point", "coordinates": [ -95.845108391528129, 35.987289 ] } },
-{ "type": "Feature", "properties": { "id": "3", "name": "Judicial District 3", "pop": 37665.1017, "rhh": 7421.5532 }, "geometry": { "type": "Point", "coordinates": [ -95.96179952614537, 36.193956 ] } },
-{ "type": "Feature", "properties": { "id": "4", "name": "Judicial District 4", "pop": 150996.459, "rhh": 23814.6065 }, "geometry": { "type": "Point", "coordinates": [ -95.895416119813277, 36.2408925 ] } },
-{ "type": "Feature", "properties": { "id": "5", "name": "Judicial District 5", "pop": 137263.3369, "rhh": 25141.1245 }, "geometry": { "type": "Point", "coordinates": [ -95.9937053305365, 36.049971 ] } }
+{ "type": "Feature", "properties": { "id": "1", "name": "Judicial District 1", "pop": 114336.7893, "rhh": 22996.2629 }, "geometry": { "type": "Point", "coordinates": [ -95.924667524126363, 36.1262091 ] } },
+{ "type": "Feature", "properties": { "id": "2", "name": "Judicial District 2", "pop": 206096.0921, "rhh": 24685.5735 }, "geometry": { "type": "Point", "coordinates": [ -95.84510664003551, 35.9872958 ] } },
+{ "type": "Feature", "properties": { "id": "3", "name": "Judicial District 3", "pop": 37659.541, "rhh": 7419.9083 }, "geometry": { "type": "Point", "coordinates": [ -95.961795368692236, 36.193954 ] } },
+{ "type": "Feature", "properties": { "id": "4", "name": "Judicial District 4", "pop": 150983.6975, "rhh": 23812.3367 }, "geometry": { "type": "Point", "coordinates": [ -95.895413277240891, 36.24089445 ] } },
+{ "type": "Feature", "properties": { "id": "5", "name": "Judicial District 5", "pop": 137275.2195, "rhh": 25144.2844 }, "geometry": { "type": "Point", "coordinates": [ -95.993702927510583, 36.0501955 ] } }
 ]
 }

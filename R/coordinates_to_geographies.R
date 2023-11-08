@@ -16,6 +16,8 @@ library(mapview)
 library(leaflet)
 library(ojodb) # Working with OJO data
 library(digest) # Hashing case ids
+library(gt) # Tables
+library(webshot2) # For gt table images
 
 coordinates_to_geographies <- function(tigris_use_cache = TRUE) {
 
@@ -27,10 +29,19 @@ coordinates_to_geographies <- function(tigris_use_cache = TRUE) {
     ojo_collect()
 
   ## Check histogram of geo_accuracy to determine reasonable cutoff
-  location_data |>
+  p <- location_data |>
     ggplot(aes(x = geo_accuracy)) +
       geom_histogram() +
       geom_vline(xintercept = 0.85)
+
+  ggsave(
+    filename = here("plots/geo_accuracy_histogram.png"),
+    plot = p,
+    width = 8,
+    height = 6,
+    units = "in",
+    dpi = 300
+  )
 
   ## Load Tulsa County Eviction Case Data
   case_data <- read_csv(here("data/tulsa_eviction_data.csv"))
@@ -42,10 +53,11 @@ coordinates_to_geographies <- function(tigris_use_cache = TRUE) {
       by = c("id" = "case")
     ) |>
     mutate(
-      id = digest(
-        object = id,
-        algo = "spookyhash"
-      )
+      id = map_chr(id, ~ digest(
+        object = .,
+        algo = "md5",
+        serialize = FALSE
+      ))
     )
 
   ## Get Number and Percent for cases that have don't have an address or have a bad accuracy score
@@ -59,6 +71,10 @@ coordinates_to_geographies <- function(tigris_use_cache = TRUE) {
     mutate(
       count_combined = count_NA + count_badAccuracy,
       percent_combined = percent_NA + percent_badAccuracy
+    ) |>
+    gt() |>
+    gt::gtsave(
+      filename = here("plots/missing_location_data.png")
     )
 
   ## Filter data for those not missing location data and for accuracy >=.85
@@ -141,12 +157,13 @@ coordinates_to_geographies <- function(tigris_use_cache = TRUE) {
   # Provide additional geographic filter to ensure data are within Tulsa County
   # Number of cases to be excluded with filter:
     # 6/8/2023: 528
-  st_disjoint(
+  num_exl <- st_disjoint(
     data_sf,
     county,
     sparse = FALSE
   ) |>
     sum()
+  log_info("{num_exl} cases outside Tulsa County excluded.")
 
   # Filter
   data_sf <- data_sf |>
@@ -285,7 +302,7 @@ coordinates_to_geographies <- function(tigris_use_cache = TRUE) {
 
   ### Mapping Example of 5000 Addresses
   # Coordinates to sf
-  mapview(
+  p <- mapview(
     voting_precincts |>
       filter(COUNTYFP20 == "143"),
     color = "purple4",
@@ -311,6 +328,14 @@ coordinates_to_geographies <- function(tigris_use_cache = TRUE) {
   mapview(
     data_sf[1:5000, ],
     col.regions = "cyan"
+  )
+
+  mapview::mapshot(
+    p,
+    file = here("plots/map_example_5k.png"),
+    remove_controls = c("zoomControl", "layersControl"),
+    width = 1000,
+    height = 1000
   )
 
   write_csv(
