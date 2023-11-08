@@ -15,6 +15,7 @@ library(sp)
 library(mapview)
 library(leaflet)
 library(ojodb) # Working with OJO data
+library(digest) # Hashing case ids
 
 coordinates_to_geographies <- function(tigris_use_cache = TRUE) {
 
@@ -39,6 +40,12 @@ coordinates_to_geographies <- function(tigris_use_cache = TRUE) {
     left_join(
       location_data,
       by = c("id" = "case")
+    ) |>
+    mutate(
+      id = digest(
+        object = id,
+        algo = "spookyhash"
+      )
     )
 
   ## Get Number and Percent for cases that have don't have an address or have a bad accuracy score
