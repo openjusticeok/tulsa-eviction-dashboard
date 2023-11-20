@@ -1,6 +1,6 @@
 {
   "appLogo": "app/assets/logo.svg",
-  "appLogoUrl": "https://openjustice.okpolicy.org/",
+  "appLogoUrl": "https://okpolicy.org/",
   "dataDownloadPath": "data/tulsa_data_download.csv",
   "state": "Oklahoma",
   "activeBubble": "efr",
