@@ -5,7 +5,7 @@
   "state": "Oklahoma",
   "activeBubble": "efr",
   "activeChoropleth": "mhi",
-  "activeRegion": "county",
+  "activeRegion": "zip",
   "activeStartDate": "2021-01-01",
   "activeEndDate": null,
   "dateRange": ["2018-01-01", "2022-05-01"],
@@ -390,6 +390,7 @@
   "langDict": {
     "en": {
       "APP_TITLE": "Tulsa Evictions",
+      "ABOUT_HEADER_LABEL": "Home",
       "STATE": "Oklahoma",
       "PARENT_MUNICIPALITY": "Tulsa",
       "REGION_COUNTY": "Counties",
