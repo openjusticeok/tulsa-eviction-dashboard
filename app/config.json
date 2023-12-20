@@ -2,6 +2,12 @@
   "appLogo": "app/assets/logo.svg",
   "appLogoUrl": "https://okpolicy.org/",
   "dataDownloadPath": "data/tulsa_data_download.csv",
+  "siteMetadata": {
+    "title": "Dashboard | Tulsa Eviction Explorer",
+    "description": "The Tulsa County Eviction Dashboard offers eviction data to empower institutions to keep families securely housed.",
+    "url": "https://tulsaevictions.org/dashboard",
+    "image": "app/assets/tulsa-evictions-social.png"
+  },
   "state": "Oklahoma",
   "activeBubble": "efr",
   "activeChoropleth": "mhi",
@@ -389,7 +395,6 @@
   "lang": "en",
   "langDict": {
     "en": {
-      "APP_TITLE": "Tulsa Evictions",
       "ABOUT_HEADER_LABEL": "Home",
       "STATE": "Oklahoma",
       "PARENT_MUNICIPALITY": "Tulsa",
